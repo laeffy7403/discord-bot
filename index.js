@@ -50,7 +50,7 @@ client.on("messageCreate", message => {
 
 
     // Check for simple toggle commands
-  if (msgContent === "on") {
+  if (msgContent === "t on") {
     // Check if user has permission to manage messages
     if (!message.member.permissions.has("MANAGE_MESSAGES")) {
       message.reply("❌ You need 'Manage Messages' permission to control keyword triggering.");
@@ -63,7 +63,7 @@ client.on("messageCreate", message => {
     return;
   }
 
-  if (msgContent === "off") {
+  if (msgContent === "t off") {
     // Check if user has permission to manage messages
     if (!message.member.permissions.has("MANAGE_MESSAGES")) {
       message.reply("❌ You need 'Manage Messages' permission to control keyword triggering.");
@@ -77,7 +77,7 @@ client.on("messageCreate", message => {
   }
 
   // Check status command
-  if (msgContent === "status") {
+  if (msgContent === "t status") {
     const guildId = message.guild.id;
     const isEnabled = getKeywordToggleState(guildId);
     const status = isEnabled ? "enabled" : "disabled";
@@ -86,12 +86,12 @@ client.on("messageCreate", message => {
     return;
   }
 
-    // Check for help command
-    var manualToggle = "keyword control toggle[need access from the server]\n[on] - enable keyword control to prevent word triggering off with certain word.(shut down)\n[off] - disable keyword control allow certain word to be trigger through texting in the chat.\n[status] - check the status of keyword contorl in the server.\n\n-- moderator respond with care msg to stop negative thought spread among people, when sensitive word like 'wtf' 'dick' and more in shown in the chat. As the mod find it to be sentitive it will trigger the care msg --"; 
-    var manualAI = "\n\nAI command [not in the toggle scope can be call when keyword control is on]\n`@wes`[your message] - use this command to trigger the AI to respond to your message.\n\n**Note:** The AI is using outdated data from 2022-2021, so it may not have the latest information.";
-      if (msgContent.includes("help")) {
-      message.channel.send(" ```" + manualToggle + manualAI + "```" + botMsg);
-    }
+  // Check for help command
+  var manualToggle = "keyword control toggle[need access from the server]\n[on] - enable keyword control to prevent word triggering off with certain word.(shut down)\n[off] - disable keyword control allow certain word to be trigger through texting in the chat.\n[status] - check the status of keyword contorl in the server.\n\n-- moderator respond with care msg to stop negative or bad mind spread among to people, when sensitive word like 'wtf' 'dick' and more. As the mod find it to be sentitive it will trigger the care msg --"; 
+  var manualAI = "\n\nAI command [not in the toggle scope can be call when keyword control is on]\n`@wes`[your message] - use this command to trigger the AI to respond to your message.\n\n**Note:** The AI is using outdated data from 2022-2021, so it may not have the latest information.";
+    if (msgContent.includes("help")) {
+    message.channel.send(" ```" + manualToggle + manualAI + "```" + botMsg);
+  }
 
 
     // Only process keyword triggers if enabled for this guild
