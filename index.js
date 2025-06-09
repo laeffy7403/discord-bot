@@ -50,13 +50,36 @@ client.on("messageCreate", message => {
 
 
     // Check for simple toggle commands
-  if (msgContent === "t on") {
-    // Check if user has permission to manage messages
-    if (!message.member.permissions.has("MANAGE_MESSAGES")) {
-      message.reply("❌ You need 'Manage Messages' permission to control keyword triggering.");
-      return;
-    }
+    //OPTION 1: TOGGLE ACCESS BASED ON SERVER PERMISSIONS
+  // if (msgContent === "t on") {
+  //   // Check if user has permission to manage messages
+  //   if (!message.member.permissions.has("MANAGE_MESSAGES")) {
+  //     message.reply("❌ You need 'Manage Messages' permission to control keyword triggering.");
+  //     return;
+  //   }
 
+  //   const guildId = message.guild.id;
+  //   keywordToggleStates.set(guildId, true);
+  //   message.reply("✅ Keyword Control is now **enabled** for this server.");
+  //   return;
+  // }
+
+  // if (msgContent === "t off") {
+  //   // Check if user has permission to manage messages
+  //   if (!message.member.permissions.has("MANAGE_MESSAGES")) {
+  //     message.reply("❌ You need 'Manage Messages' permission to control keyword triggering.");
+  //     return;
+  //   }
+
+  //   const guildId = message.guild.id;
+  //   keywordToggleStates.set(guildId, false);
+  //   message.reply("❌ Keyword Control is now **disabled** for this server.");
+  //   return;
+  // }
+
+
+  //OPTION 2: TOGGLE ACCESS BASED WITHOUT SERVER PERMISSIONS
+    if (msgContent === "t on") {
     const guildId = message.guild.id;
     keywordToggleStates.set(guildId, true);
     message.reply("✅ Keyword Control is now **enabled** for this server.");
@@ -64,17 +87,12 @@ client.on("messageCreate", message => {
   }
 
   if (msgContent === "t off") {
-    // Check if user has permission to manage messages
-    if (!message.member.permissions.has("MANAGE_MESSAGES")) {
-      message.reply("❌ You need 'Manage Messages' permission to control keyword triggering.");
-      return;
-    }
-
     const guildId = message.guild.id;
     keywordToggleStates.set(guildId, false);
     message.reply("❌ Keyword Control is now **disabled** for this server.");
     return;
   }
+
 
   // Check status command
   if (msgContent === "t status") {
@@ -87,7 +105,7 @@ client.on("messageCreate", message => {
   }
 
   // Check for help command
-  var manualToggle = "keyword control toggle[need access from the server]\n[on] - enable keyword control to prevent word triggering off with certain word.(shut down)\n[off] - disable keyword control allow certain word to be trigger through texting in the chat.\n[status] - check the status of keyword contorl in the server.\n\n-- moderator respond with care msg to stop negative or bad mind spread among to people, when sensitive word like 'wtf' 'dick' and more. As the mod find it to be sentitive it will trigger the care msg --"; 
+  var manualToggle = "keyword control toggle[need access from the server]\n[t on] - enable keyword control to prevent word triggering off with certain word.(shut down)\n[t off] - disable keyword control allow certain word to be trigger through texting in the chat.\n[t status] - check the status of keyword contorl in the server.\n\n-- moderator respond with care msg to stop negative or bad mind spread among to people, when sensitive word like 'wtf' 'dick' and more. As the mod find it to be sentitive it will trigger the care msg --"; 
   var manualAI = "\n\nAI command [not in the toggle scope can be call when keyword control is on]\n`@wes`[your message] - use this command to trigger the AI to respond to your message.\n\n**Note:** The AI is using outdated data from 2022-2021, so it may not have the latest information.";
     if (msgContent.includes("help")) {
     message.channel.send(" ```" + manualToggle + manualAI + "```" + botMsg);
@@ -133,13 +151,13 @@ client.on("messageCreate", message => {
   }
 
 
-  var keyGroupB = ["lean", "wow", "damn", "dem", "lol", "lmao"];
+  var keyGroupB = ["lean", "wow", "damn", "dem", "lol", "lmao", "cola", "coke", "cough"];
   if (keyGroupB.some(trigger => msgContent.includes(trigger))) {
     message.channel.send("It literally just cola you piece of shit. There's no cough syrup or anything. What the fuck is wrong with you. How fucking desperate are you to seem cool that you decide you want to force a `joke` about a child consuming drugs. Which would be funny except nothing in this scene implies that they're doing drugs or a drug stand-in. You just saw a can of soda and the two neurons in your head fired for the first time in a week, and you jumped into the comments to screech lEAn and spam purple emojis like a clown bastard. You people are the reason art is dying. Fuck you. " + botMsg);
   }
 
 
-  var keyGroupC = ["i see", "ic"];
+  var keyGroupC = ["i see", "trip"];
   if (keyGroupC.some(trigger => msgContent.includes(trigger))) {
     message.channel.send("My mom fucked my friend while we were on vacation and now I want to fucking die, she mom took us to Miami for a spring break vacation. Everything seemed normal when we were there and when we got back. But then rumors started. They spread all throughout my school and a bunch of kids asked me if my mom really had sex with a student. Of course I denied it. Until my close friend who was there told me. He told me one of the nights we went down to the hotel pool and said friend stayed up, saying he wanted to go to bed early. He stayed up there and then something happened and my mom slept with him. I feel sick to my stomach and so mad writing it. I confronted her and she admitted and tried to apologize, but I just can’t with her. She’s so disgusting. I’m contemplating just telling my dad so he can fly me up to his house, but I hate being around his dumb bimbo gold digging girlfriend. I want to fight that fucking asshole that did this. He’s ruining my fucking life. " + botMsg);
   }
@@ -168,7 +186,7 @@ client.on("messageCreate", message => {
   }
 
 
-  var keyGroupH = ["clown", "🤡"];
+  var keyGroupH = ["clown", "🤡", "sex"];
   if (keyGroupH.some(trigger => msgContent.includes(trigger))) {
     message.channel.send("im so desparate to have sex with a female clown i cant take it. More than anything i just want a beautiful women with a clown costume, amke up and a big red nose to have sweaty passionate sex with. I want her to lay on my bed, take her big shoes off and let me suck blows up condoms and makes them into balloon animals.They i want her to take off her clown pants and clown u underwear then start pulling several feet of colored scarves out of her pussy.Once the scarves are out I want to enter her then fuck her as she honks her big red noise in time to my thrusts. I want her to do the clown laugh and spray me with a squirt gun flower as I cum i dont know why i have this fantasy but i do its killing me.i want clown pussy so bad it hurt.. " + botMsg);
   }
@@ -186,7 +204,7 @@ client.on("messageCreate", message => {
   }
 
 
-  var keyGroupK = ["mac", "cheese"];
+  var keyGroupK = ["mac", "cheese","sister"];
   if (keyGroupK.some(trigger => msgContent.includes(trigger))) {
     message.channel.send("i swear all she does all day is masterbate and masterbate, it sound like she's mixing mac and cheese and you can hear it throughtout the whole fucking house. My mom has been complaining to her but my sister just started going louder and louder. Worst part is my computer is in her room so everyday i have to go in there and see her just fucking DEMOLISHING her pussy, juice flying everywhere! and then i say, 'hey maybe out down a towel to keep clean atleast', BUT SHE JUST FUCKING IGNORES ME. I cant stand living here honestly. Yesterday when i went to go use my couputer it was absolutely drenched in her juices, and she stained atleast 6 of my shirts by now. And all my friends at school tease me, 'haha haha tobias got his sister's grool on his shirt', 'girlcum tobias' has become my nickname. i fucking hate it!. " + botMsg);
   }
@@ -204,9 +222,9 @@ client.on("messageCreate", message => {
     message.channel.send("i was in science class… i got up to sharpen my dream pencil, and then my dream themed dildo fell out of my ass. i always keep it down there cause I like to imagine daddy dream ♥♥♥♥♥♥♥ me 24/7 and it feels so good. anyways it fell out of my ass and out of my pants and my dreamphobic classmates started laughing and making fun of me. the teacher sent me to the office and i had to explain what happened. the principal suspended me from school for a week!!! this is unacceptable. just because i love dream is not a reason to harass me" + botMsg);
   }
 
-  if (message.content.toLowerCase().includes("ok")) {
-    message.channel.send("'ok', i see. So you built up the energy to reply nothing other than 'ok'. Out of all the things you could've replied, you just went 'ok' . Wow. Fuck you dipshit. This is not 'ok' . Dont think this is even funny. Even a feminist comedian is funnier than is shit. i sat and typed a proper message, I put time and thought into it and you jizz all over it by posting the two letter message 'ok'. You did not take one bit of my message into consideration, you just replied that without the intention of contributing to the conversation. I cant believe that you're this stupid. I do NOT waste my time when i write messages. YOU did, you took 5 second out of your life just to say 'ok' and piss me off. You fucking piece of shit. I hope you die alone in pain. You're an absolute disgrace to humanity and you know it. im amazed you even have friends. They must be assholes who spend all their time replying 'ok' to proper messages too. Now find something else to do with your life. You're fucking dead, 'ok' iddo. " + botMsg);
-  }
+    if (message.content.toLowerCase().includes("ok")) {
+      message.channel.send("'ok', i see. So you built up the energy to reply nothing other than 'ok'. Out of all the things you could've replied, you just went 'ok' . Wow. Fuck you dipshit. This is not 'ok' . Dont think this is even funny. Even a feminist comedian is funnier than is shit. i sat and typed a proper message, I put time and thought into it and you jizz all over it by posting the two letter message 'ok'. You did not take one bit of my message into consideration, you just replied that without the intention of contributing to the conversation. I cant believe that you're this stupid. I do NOT waste my time when i write messages. YOU did, you took 5 second out of your life just to say 'ok' and piss me off. You fucking piece of shit. I hope you die alone in pain. You're an absolute disgrace to humanity and you know it. im amazed you even have friends. They must be assholes who spend all their time replying 'ok' to proper messages too. Now find something else to do with your life. You're fucking dead, 'ok' iddo. " + botMsg);
+    }
 
   // if (message.content.toLowerCase().includes("?")) {
   //   message.channel.send("'?', i see. So you built up the energy to reply nothing other than '?'. Out of all the things you could've replied, you just went '?' . Wow. Fuck you dipshit. This is not '?' . Dont think this is even funny. Even a feminist comedian is funnier than is shit. i sat and typed a proper message, I put time and thought into it and you jizz all over it by posting the two letter message '?'. You did not take one bit of my message into consideration, you just replied that without the intention of contributing to the conversation. I cant believe that you're this stupid. I do NOT waste my time when i write messages. YOU did, you took 5 second out of your life just to say '?' and piss me off. You fucking piece of shit. I hope you die alone in pain. You're an absolute disgrace to humanity and you know it. im amazed you even have friends. They must be assholes who spend all their time replying 'ok' to proper messages too. Now find something else to do with your life. You're fucking dead, '?' iddo. )" + botMsg);
