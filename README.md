@@ -1,1 +1,1 @@
-this repo is ONLY work on replit. Which kinda strcited so it motive me to migarted to vscode with some re-config
+this repo ONLY works on replit. Which kinda strcited so it motive me to migart everything to vscode with some config
